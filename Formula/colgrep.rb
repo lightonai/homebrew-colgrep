@@ -1,8 +1,8 @@
 class Colgrep < Formula
   desc "Semantic code search powered by late-interaction models"
   homepage "https://github.com/lightonai/next-plaid"
-  url "https://github.com/lightonai/next-plaid/archive/refs/tags/1.0.6.tar.gz"
-  sha256 "029d6003f7312d79ef2f2feafe497aa5cf90f3c0c17df6d4aab0b43f081d78db"
+  url "https://github.com/lightonai/next-plaid/archive/refs/tags/1.0.7.tar.gz"
+  sha256 "5a5449ac01b9d2e7301d02c7f74097d1f38a90265a4106113429328aa35bb21d"
   license "Apache-2.0"
   head "https://github.com/lightonai/next-plaid.git", branch: "main"
 
