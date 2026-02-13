@@ -8,28 +8,20 @@ class Colgrep < Formula
     if Hardware::CPU.arm?
       url "https://github.com/lightonai/next-plaid/releases/download/1.0.6/colgrep-aarch64-apple-darwin.tar.xz"
       sha256 "0195c494dca8ddf91fb443a4192a03ead73753ef7abbb30fb86e8aa4c3acc67a"
-
-      def install
-        bin.install "colgrep-aarch64-apple-darwin/colgrep"
-      end
     else
       url "https://github.com/lightonai/next-plaid/releases/download/1.0.6/colgrep-x86_64-apple-darwin.tar.xz"
       sha256 "b5c88175941b267ff04d73999b08c4334fdb35c1d017538c6a3f0446eae75ef3"
-
-      def install
-        bin.install "colgrep-x86_64-apple-darwin/colgrep"
-      end
     end
+  end
+
+  def install
+    bin.install "colgrep"
   end
 
   on_linux do
     if Hardware::CPU.intel?
       url "https://github.com/lightonai/next-plaid/releases/download/1.0.6/colgrep-x86_64-unknown-linux-gnu.tar.xz"
       sha256 "0f042f03bc24528a309ed3e94c578f70f9ae2475002cbfcecfe9a4166f5e4432"
-
-      def install
-        bin.install "colgrep-x86_64-unknown-linux-gnu/colgrep"
-      end
     end
   end
 
