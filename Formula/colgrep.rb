@@ -15,7 +15,7 @@ class Colgrep < Formula
 
   def install
     features = []
-    on_macos do
+    if OS.mac?
       features << "accelerate"
       features << "coreml" if Hardware::CPU.arm?
     end
