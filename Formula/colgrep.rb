@@ -1,27 +1,30 @@
 class Colgrep < Formula
   desc "Semantic code search powered by late-interaction models"
   homepage "https://github.com/lightonai/next-plaid"
-  version "1.0.6"
+  url "https://github.com/lightonai/next-plaid/archive/refs/tags/1.0.6.tar.gz"
+  sha256 "029d6003f7312d79ef2f2feafe497aa5cf90f3c0c17df6d4aab0b43f081d78db"
   license "Apache-2.0"
+  head "https://github.com/lightonai/next-plaid.git", branch: "main"
 
-  on_macos do
-    if Hardware::CPU.arm?
-      url "https://github.com/lightonai/next-plaid/releases/download/1.0.6/colgrep-aarch64-apple-darwin.tar.xz"
-      sha256 "0195c494dca8ddf91fb443a4192a03ead73753ef7abbb30fb86e8aa4c3acc67a"
-    else
-      url "https://github.com/lightonai/next-plaid/releases/download/1.0.6/colgrep-x86_64-apple-darwin.tar.xz"
-      sha256 "b5c88175941b267ff04d73999b08c4334fdb35c1d017538c6a3f0446eae75ef3"
-    end
+  livecheck do
+    url :stable
+    strategy :github_latest
   end
+
+  depends_on "rust" => :build
 
   def install
-    bin.install "colgrep"
-  end
+    features = []
+    on_macos do
+      features << "accelerate"
+      features << "coreml" if Hardware::CPU.arm?
+    end
 
-  on_linux do
-    if Hardware::CPU.intel?
-      url "https://github.com/lightonai/next-plaid/releases/download/1.0.6/colgrep-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "0f042f03bc24528a309ed3e94c578f70f9ae2475002cbfcecfe9a4166f5e4432"
+    args = std_cargo_args(path: "colgrep")
+    if features.any?
+      system "cargo", "install", "--features", features.join(","), *args
+    else
+      system "cargo", "install", *args
     end
   end
 
